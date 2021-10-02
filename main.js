@@ -3,11 +3,15 @@ leftWristX=0;
 leftWristY=0;
 rightWristX=0;
 rightWristY=0;
-scoreleftwrist=0;
 scorerightwrist=0;
+scoreleftwrist=0;
+status1song="";
+status2song="";
+
 
 function preload(){
-    song= loadSound('music.mp3');
+    song1= loadSound('music.mp3');
+    song2= loadSound('music2.mp3');
 }
 
 function setup(){
@@ -27,48 +31,25 @@ function modelLoaded(){
 
 function draw(){
     image(video, 0, 0, 600, 500);
+  status1song= song1.isPlaying();
+  status2song= song2.isPlaying();
     fill("green");
     stroke("black");
 
     if(scorerightwrist > 0.2){
         circle(rightWristX , rightWristY, 20);
-        song.stop();
+        song2.stop();
 
-        if (rightwristY > 0 && rightWristY <= 100){
-        document.getElementById("speed").innerHTMl="Speed = 0.5x" ;
-        song.rate(0.5);
-        }
+    if(song1status == false){
+    song1.play();
+    document.getElementById("song").innerHTML="playing:pirate";
+    }
 
-        else if(rightwristY > 100 && rightWristY <= 200){
-            document.getElementById("speed").innerHTML="Speed = 1x";
-            song.rate(1);
-        }
 
-        else if(rightWristY > 200 && rightWristY <= 300){
-        document.getElementById("speed").innerHTML="Speed = 1.5x";
-        song.rate(1.5);
-        }
-
-        else if(rightWristY > 300 && rightWristY <= 400){
-            document.getElementById("speed").innerHTML="Speed = 2x";
-            song.rate(2);
-            } 
-
-     
-            else if(rightWristY > 400 && rightWristY <= 500){
-                document.getElementById("speed").innerHTML="Speed = 2.5x";
-                song.rate(2.5);
-            }
+    
             
 }
 
-if(scoreleftwrist > 0.2){
-    circle(leftWristX, leftWristY, 20);
-    InnumberleftwristY= Number(leftWristY);
-    remove_decimals= floor(InnumberleftwristY);
-    volume= remove_decimals/500;
-    document.getElementById("volume").innerHTML="Volume=" + volume;
-    song.setVolume(volume); 
 
 function play(){
     song.play();
@@ -85,9 +66,8 @@ function gotPoses(results){
 if(results.length > 0){
     console.log(results);
     scorerightwrist=results[0].pose.keypoints[10].score;
-    console.log("scorerightwrist" + scorerightwrist);
     scoreleftwrist=results[0].pose.keypoints[9].score;
-    console.log("scoreleftwrist" + scoreleftwrist);
+    console.log("scoreleftwrist= " +scoreleftwrist+ "scorerightwrist =" +scorerightwrist);
     leftWristX=results[0].pose.leftWrist.x;
     leftWristY=results[0].pose.leftWrist.y;
     console.log("leftWristX =" + leftWristX + "leftWristY =" + leftWristY );
@@ -102,4 +82,4 @@ if(results.length > 0){
 
 }
 
-}
+
