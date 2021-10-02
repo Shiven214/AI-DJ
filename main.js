@@ -7,6 +7,8 @@ scorerightwrist=0;
 scoreleftwrist=0;
 status1song="";
 status2song="";
+song1="";
+song2="";
 
 
 function preload(){
