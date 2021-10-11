@@ -42,14 +42,27 @@ function draw(){
         circle(rightWristX , rightWristY, 20);
         song2.stop();
 
-    if(song1status == false){
+    }
+
+    if(status1song == false){
     song1.play();
     document.getElementById("song").innerHTML="playing:pirate";
     }
 
 
+    if(scoreleftwrist > 0.2){
+        circle(leftWristX , leftWristY, 20);
+        song1.stop();
+
+    if(status2song == false){
+    song2.play();
+    document.getElementById("song").innerHTML="playing:island";
     
             
+}
+
+}
+
 }
 
 
@@ -77,11 +90,7 @@ if(results.length > 0){
     rightWristX=results[0].pose.rightWrist.x;
     rightWristY=results[0].pose.rightWrist.y;
     console.log("rightWristX =" + rightWristX + "rightWristY =" + rightWristY );
-}
 
 
-}
 
-}
-
-
+}}
